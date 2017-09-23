@@ -4,11 +4,14 @@ import cx_Oracle
 class connectToOracle():
 
 	def __init__(self,connectionString,textAreaBastidores):
-		self.query=query
 		self.connectionString=connectionString
+		self.textAreaBastidores=textAreaBastidores
 	def connect(self):
 		try:	   
 			con =  cx_Oracle.connect(self.connectionString)
+			for bastidor in self.textAreaBastidores.split():
+				print(bastidor)
+			
 			#print(con.version)
 			#cur = con.cursor()
 			#cur.execute(self.query)
