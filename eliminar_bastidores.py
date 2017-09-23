@@ -13,6 +13,7 @@ class MyFrame(wx.Frame):
         self.buttonTextArea.Bind(wx.EVT_BUTTON, self.OnbuttonTextArea)
         connectionString='WORK_SKO/WORK_SKO@bvn002b.bbdo.local/PRDBATCH'
         self.Show(True)
+        #HA FUNCIONADO EL GIT
 
     def OnbuttonTextArea(self, e):
         textAreaBastidores = self.control.GetValue()
