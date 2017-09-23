@@ -14,7 +14,7 @@ class connectToOracle():
 			#cur.execute(self.query)
 			#cur.execute("select * from sko_exec_transactions")
 			#for result in cur:
-				#print(result)
+			#print(result)
 			#return cur
 			#cur.close()
 			#con.close()
