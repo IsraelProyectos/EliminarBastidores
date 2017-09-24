@@ -2,35 +2,40 @@
 #coding=utf-8
 import wx
 import accesoOracle
+import eliminarBastidores
 class MyFrame(wx.Frame):
     """ Una clase personalizada de frame """
     def __init__(self, parent, title):
-        wx.Frame.__init__(self, parent, title=title, size=(400,200))
+        wx.Frame.__init__(self, parent, title=title, size=(500,300))
         # Control de texto multilínea
-        self.txt = wx.TextCtrl(self, pos=(0,0), size=(100,20))
-        self.control = wx.TextCtrl(self, pos=(0,55), size=(200,50), style=wx.TE_MULTILINE)
-        self.buttonTextArea = wx.Button(self, label="hola", pos=(0, 100), size=(50,50))
+
+        self.labelTransactionID = wx.StaticText(self, label="Introduce abajo los TransactionID (Separados por Return o por un espacio entre ellos)", pos=(0,10), size=(500, 20))
+        self.textAreaBastidores = wx.TextCtrl(self, pos=(0,30), size=(200,70))
+        self.labelBastidores = wx.StaticText(self, label="Introduce abajo los Bastidores (Separados por Return o por un espacio entre ellos)", pos=(0,110), size=(500, 20))
+        self.textAreaTransactionID = wx.TextCtrl(self, pos=(0,130), size=(200,70), style=wx.TE_MULTILINE)
+        self.buttonTextArea = wx.Button(self, label="Ejecutar borrado", pos=(0,210), size=(100,20))
         self.buttonTextArea.Bind(wx.EVT_BUTTON, self.OnbuttonTextArea)
-        #self.connectionString='WORK_SKO/WORK_SKO@bvn002b.bbdo.local/PRDBATCH'
-        self.connectionString='DRUGO73/lokomotiv1970@127.0.0.1/xe'
+        
         self.Show(True)
-        #HA FUNCIONADO EL GIT
 
     def OnbuttonTextArea(self, e):
-        textAreaBastidores = self.control.GetValue()
+        bastidores = self.textAreaBastidores.GetValue()
+        transactionID = self.textAreaTransactionID.GetValue()
         
-        #self.txt.SetValue(textAreaBastidores.split())
-        #print(textAreaBastidores.split())
-        ao=accesoOracle.connectToOracle(self.connectionString)
-        #print(ao.connect())
-        if ao.connect():
-        	print("Conexion establecida")
-        	ao.disConnect()
+        if len(bastidores) == 0 and len(transactionID) == 0:
+        	self.textAreaBastidores.SetValue("No puede estar vacio")
+        	self.textAreaTransactionID.SetValue("No puede estar vacio")
+        	print("no puedes dejar en blanco ningun texto")
+        elif len(bastidores) == 0:
+        	self.textAreaBastidores.SetValue("No puede estar vacio")
+        	print("no puedes dejar en blanco ningun texto")
+        elif len(transactionID) == 0:
+        	self.textAreaTransactionID.SetValue("No puede estar vacio")
+        	print("no puedes dejar en blanco ningun texto")
         else:
-        	print("Conexion rechazada")
-        	
-        #print(textAreaBastidores)
+        	eb=eliminarBastidores.deleteBastidores(bastidores, transactionID)
+        	eb.delete()
 
 app = wx.App(False)
-frame = MyFrame(None, 'Editor simple')
+frame = MyFrame(None, 'Eliminar Bastidores')
 app.MainLoop()
