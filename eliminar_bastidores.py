@@ -21,8 +21,14 @@ class MyFrame(wx.Frame):
         
         #self.txt.SetValue(textAreaBastidores.split())
         #print(textAreaBastidores.split())
-        ao=accesoOracle.connectToOracle(self.connectionString, textAreaBastidores)
-        ao.connect()
+        ao=accesoOracle.connectToOracle(self.connectionString)
+        #print(ao.connect())
+        if ao.connect():
+        	print("Conexion establecida")
+        	ao.disConnect()
+        else:
+        	print("Conexion rechazada")
+        	
         #print(textAreaBastidores)
 
 app = wx.App(False)
