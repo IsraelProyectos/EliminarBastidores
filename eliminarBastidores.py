@@ -18,12 +18,12 @@ class deleteBastidores():
 
 		for transactionID in self.textAreaTransactionID.split():
 			print(transactionID)
-			for bastidores in self.textAreaBastidores.split():
-				print(transactionID, bastidores)
+			IDINTEGER = int(transactionID)
+			for bastidor in self.textAreaBastidores.split():
+				print(transactionID, bastidor)
 				cur = ao.connect().cursor()
-				feo='FEO'
 				#cur.callproc("deleteBastidoresFF(80, FEO)")
-				cur.callproc("deleteBastidoresFF", [80, 'FEO'])
+				cur.callproc("deleteBastidoresFF", [IDINTEGER, bastidor])
 				#cur.execute("UPDATE GT_ACTION_PERSONALIZATION_PROX SET BASTIDOR= 'OTRAVEZ' WHERE ID = 7")
 				#cur.execute("DELETE GT_ACTION_PERSONALIZATION_PROX WHERE ID = 7")
 				# for personaje in cursorData:
