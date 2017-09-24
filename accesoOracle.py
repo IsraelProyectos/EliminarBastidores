@@ -21,7 +21,7 @@ class connectToOracle():
 			#return cur
 			#cur.close()
 			#con.close()
-			return(True)
+			return(self.con)
 
 		except cx_Oracle.DatabaseError as e:
 			error, = e.args
@@ -32,5 +32,6 @@ class connectToOracle():
 				return(False)
 			
 	def disConnect(self):
+		self.con.commit()
 		self.con.close()
 		print("Conexion cerrada")
