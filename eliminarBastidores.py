@@ -7,6 +7,7 @@ class deleteBastidores():
 		
 	def delete(self):
 		#self.__cursor.callproc("PKG_HR.FIND_EMPLOYEES"
+		#self.connectionString='BDC_SKO/WORK_SKO@bvn002b.bbdo.local/PRDBATCH'
 		#self.connectionString='WORK_SKO/WORK_SKO@bvn002b.bbdo.local/PRDBATCH'
 		connectionString='DRUGO73/lokomotiv1970@127.0.0.1/xe'
 
