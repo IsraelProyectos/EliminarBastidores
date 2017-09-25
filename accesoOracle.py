@@ -5,32 +5,29 @@ class connectToOracle():
 
 	def __init__(self,connectionString):
 		self.connectionString=connectionString
-		#self.textAreaBastidores=textAreaBastidores
+
 	def connect(self):
-		try:	   
+		try:
+		    #Conexion a BBDD	   
 			self.con =  cx_Oracle.connect(self.connectionString)
-			#for bastidor in self.textAreaBastidores.split():
-				#print(bastidor)
 			
-			#print(con.version)
-			#cur = con.cursor()
-			#cur.execute(self.query)
-			#cur.execute("select * from sko_exec_transactions")
-			#for result in cur:
-			#print(result)
-			#return cur
-			#cur.close()
-			#con.close()
+			#Retornar el objeto conexion
 			return(self.con)
 
 		except cx_Oracle.DatabaseError as e:
+
+			#Excepciones de la conexion
 			error, = e.args
+
+			#Entrega del campo de la query vacia(Solo se utiliza para escribir directamente la query en un TextBox)
 			if error.code == 24373:
 				print("Se ha entregado una query vacia")
+			#Error en el string de conexion	
 			elif error.code == 12154:
 				print("ConexionString es erroneo")
 				return(False)
-			
+	
+	#Metodo para hacer commit en la BBDD y cerrar la conexion		
 	def disConnect(self):
 		self.con.commit()
 		self.con.close()
