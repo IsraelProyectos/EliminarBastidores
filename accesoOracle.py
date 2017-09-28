@@ -23,9 +23,14 @@ class connectToOracle():
 			if error.code == 24373:
 				print("Se ha entregado una query vacia")
 			#Error en el string de conexion	
-			elif error.code == 12154:
+			elif (error.code == 12154) or (error.code == 12560) or (error.code == 12541):
 				print("ConexionString es erroneo")
-				return(False)
+			elif error.code == 1017:
+				print("Usuario y/o contrasena incorrecta")
+			elif error.code == 28000:
+				print("La cuenta esta bloqueada")	
+			else:
+				print("No se ha  podido conectar")
 	
 	#Metodo para hacer commit en la BBDD y cerrar la conexion		
 	def disConnect(self):
